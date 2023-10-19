@@ -3,12 +3,12 @@
   document.getElementById("addProduct").addEventListener("submit", (event) => {
     event.preventDefault();
     const newProduct = {
-      title: document.getElementById("input-title").value,
-      description: document.getElementById("input-description").value,
-      code: document.getElementById("input-code").value,
-      price: document.getElementById("input-price").value,
-      stock: document.getElementById("input-stock").value,
-      category: document.getElementById("input-category").value,
+      title: document.getElementById("titleProduct").value,
+      description: document.getElementById("descriptionProduct").value,
+      code: document.getElementById("codeProduct").value,
+      price: document.getElementById("priceProduct").value,
+      stock: document.getElementById("stockProduct").value,
+      category: document.getElementById("catProduct").value,
     };
     socket.emit("addProduct", newProduct);
   });

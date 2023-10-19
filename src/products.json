@@ -7,5 +7,21 @@
 		"thumbnail": "without img",
 		"code": "ab2c2014416514",
 		"stock": 5
+	},
+	{
+		"id": "e6463107-962a-40c6-8e6a-a44674f80e0f",
+		"title": "zapatilla nike",
+		"description": "zapatilla nike ",
+		"price": "1200",
+		"code": "1234",
+		"stock": "-1"
+	},
+	{
+		"id": "6ff40f5b-adaf-4da3-babc-809af4b15c6f",
+		"title": "saksn",
+		"description": "jaksl",
+		"price": "23",
+		"code": "1",
+		"stock": "1"
 	}
 ]

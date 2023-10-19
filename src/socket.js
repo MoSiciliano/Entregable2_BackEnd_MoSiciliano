@@ -13,8 +13,8 @@ export const init = (httpServer) => {
 
     socketClient.emit("listProducts", products);
     socketClient.on("addProduct", async (newProduct) => {
-      await productManager.addProducts(newProduct);
-      console.log(products);
+      await productManager.addProduct(newProduct);
+      // console.log(products);
       io.emit("listProducts", products);
     });
     socketClient.on("disconnect", () => {

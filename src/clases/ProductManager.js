@@ -11,14 +11,12 @@ class ProductManager {
     title,
     description,
     price,
-    thumbnail,
+    // thumbnail,
     code,
     stock,
     category,
   }) {
-    if (
-      !(title && description && price && thumbnail && code && stock && category)
-    ) {
+    if (!(title && description && price && code && stock && category)) {
       throw new Error("Data is missing, please check it");
     }
     try {
@@ -31,7 +29,7 @@ class ProductManager {
           title,
           description,
           price,
-          thumbnail,
+
           code,
           stock,
         };

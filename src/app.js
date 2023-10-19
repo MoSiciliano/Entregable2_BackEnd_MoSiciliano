@@ -17,7 +17,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
 app.get("/", homeRouter);
-
+app.get("/realTimeProducts", homeRouter);
 app.use("/api/products", routerProducts);
 app.use("/api/carts", routerCarts);
 
