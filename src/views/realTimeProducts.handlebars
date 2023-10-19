@@ -1,0 +1,55 @@
+<main class="container">
+     <h1>Real-time products page</h1>
+     <p>Here you can view, add and delete products! Try it😁</p>
+     <div>
+        <h3>Add a product:</h3>
+        <div class="login-box">
+            <form id="addProduct" action="/api/products" method="POST">
+              <div class="user-box">
+                <input id="titleProduct" type="text" name="" required>
+                <label>Product name</label>
+              </div>
+              <div class="user-box">
+                <input id="descriptionProduct" type="text" name="" required>
+                <label>Product description</label>
+              </div>
+              <div class="user-box">
+                <input id="codeProduct" type="text" name="" required>
+                <label>Product code</label>
+              </div>
+              <div class="user-box">
+                <input id="priceProduct" type="number" name="" required>
+                <label>Product price</label>
+              </div>
+              <div class="user-box">
+                <input id="stockProduct" type="number" name="" required>
+                <label>Product stock</label>
+              </div>
+              <div class="user-box">
+                <input id="catProduct" type="text" name="" required>
+                <label>Product category</label>
+              </div>
+              <center>
+                    <input id="addButton" type="submit" value="add Product">
+                 <span></span>
+              </center>
+            </form>
+        </div>
+     </div>
+     <div>
+        <h3>View of products:</h3>
+        <div id="divRealTimeProducts"></div>
+     </div>
+     <div>
+        <h3>Delete a product:</h3>
+        <form action="/api/products/:pid" method="DELETE">
+         <div class="user-box">
+                <input id="idProductDelete" type="text" required>
+                <label>Product name</label>
+        </div>
+        <center>
+             <input id="deleteButton" type="submit" value="Delete Product">
+        </center>
+        </form>
+     </div>
+</main>

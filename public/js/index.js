@@ -1,33 +1,34 @@
 (function () {
   const socket = io();
-  let messages = [];
-  const formMessage = document.getElementById("form-message");
-  const inputMessage = document.getElementById("input-message");
-  const showMessage = document.getElementById("show-message");
-  formMessage.addEventListener("submit", (event) => {
+  document.getElementById("addProduct").addEventListener("submit", (event) => {
     event.preventDefault();
-    messages.push({
-      socketId: socket.id,
-      message: inputMessage.value,
-    });
-    socket.emit("new-message", inputMessage.value);
-    inputMessage.value = "";
-    inputMessage.focus();
+    const newProduct = {
+      title: document.getElementById("input-title").value,
+      description: document.getElementById("input-description").value,
+      code: document.getElementById("input-code").value,
+      price: document.getElementById("input-price").value,
+      stock: document.getElementById("input-stock").value,
+      category: document.getElementById("input-category").value,
+    };
+    socket.emit("addProduct", newProduct);
   });
-  function updateMessages(messages) {
-    showMessage.innerText = "";
-    messages.forEach((message) => {
-      const item = document.createElement("li");
-      item.innerText = `(${message.socketId}) ${message.body}`;
-      showMessage.appendChild(item);
+  socket.on("listProducts", (products) => {
+    const divProducts = document.getElementById("divRealTimeProducts");
+    console.log(divProducts);
+    console.log(products);
+    divProducts.innerText = "";
+    console.log(products);
+    products.forEach((p) => {
+      const productElement = document.createElement("div");
+      productElement.innerHTML = `
+        <h3>${p.title}</h3>
+        <p>Description: ${p.description}</p>
+        <p>Price: ${p.price}</p>
+        <p>Stock: ${p.stock}</p>
+        <p id="idProd">Id:${p.id}</p>
+        `;
+      divProducts.appendChild(productElement);
     });
-  }
-  socket.on("start", (data) => {
-    messages = data;
-    updateMessages(messages);
-  });
-  socket.on("notification", (message) => {
-    messages.push(message);
-    updateMessages(messages);
   });
 })();
+console.log("hola desde el real time products");

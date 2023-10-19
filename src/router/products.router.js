@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
   const { title, description, code, price, stock, category, thumbnail } =
     req.body;
   try {
+    console.log(req.body);
     if (
       !(title && description && price && thumbnail && code && stock && category)
     ) {
@@ -22,16 +23,16 @@ router.post("/", async (req, res) => {
     const newProduct = {
       ...req.body,
     };
-    let addedProduct = await productManager.addProduct(newProduct);
+    const addedProduct = await productManager.addProduct(newProduct);
     if (typeof addedProduct !== "string") {
       console.log(addedProduct);
-      //console.log(`Product added`);
+      console.log(`Product added`);
       res.status(201).send(newProduct);
     } else {
       return res.status(400).json({ error: "Product already exist" });
     }
   } catch (error) {
-    //console.log("error", error);
+    console.log("error", error);
     return res.status(500).send(error);
   }
 });

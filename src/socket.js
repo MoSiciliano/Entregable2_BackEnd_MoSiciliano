@@ -1,16 +1,27 @@
 import { Server } from "socket.io";
-import ProductManager from "../src/clases/ProductManager.js";
-const productManager = new ProductManager();
+import ProductManager from "./clases/ProductManager.js";
+
 let io;
-export const init = (serverHttp) => {
-  io = new Server(serverHttp);
+
+const productManager = new ProductManager();
+const products = await productManager.getProducts();
+
+export const init = (httpServer) => {
+  io = new Server(httpServer);
   io.on("connection", async (socketClient) => {
-    console.log(`Se ha conectado un nuevo cliente  (${socketClient.id}) 🎊`);
-    const products = await productManager.getProducts();
+    console.log("Cliente conectado 💪 ", socketClient.id);
+
     socketClient.emit("listProducts", products);
+    socketClient.on("addProduct", async (newProduct) => {
+      await productManager.addProducts(newProduct);
+      console.log(products);
+      io.emit("listProducts", products);
+    });
     socketClient.on("disconnect", () => {
       console.log(`Se ha desconectado el cliente : ${socketClient.id} 😔`);
     });
   });
-  console.log(`Server socket running ✔️`);
+  console.log("server socket running");
 };
+
+// export const emitData = (event, data) => io.emit(event, data);

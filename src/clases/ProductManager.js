@@ -2,7 +2,7 @@ import { getJSONFromFile, saveJSONToFile } from "../utils.js";
 import { v4 as uuidv4 } from "uuid";
 class ProductManager {
   constructor() {
-    this.path = "./src/data/products.json";
+    this.path = "./src/products.json";
   }
   async getProducts() {
     return await getJSONFromFile(this.path);
@@ -23,6 +23,7 @@ class ProductManager {
     }
     try {
       const products = await this.getProducts();
+      console.log(products);
       const codeExist = products.find((product) => product.code === code);
       if (!codeExist) {
         const newProduct = {
