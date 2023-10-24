@@ -17,10 +17,15 @@ export const init = (httpServer) => {
       // console.log(products);
       io.emit("listProducts", products);
     });
+    socketClient.on("deleteProductById", async (idToDelete) => {
+      await productManager.deleteProduct(idToDelete);
+      io.emit("listProducts", products);
+    });
     socketClient.on("disconnect", () => {
       console.log(`Se ha desconectado el cliente : ${socketClient.id} 😔`);
     });
   });
+
   console.log("server socket running");
 };
 

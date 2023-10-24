@@ -15,13 +15,5 @@
 		"price": "1200",
 		"code": "1234",
 		"stock": "-1"
-	},
-	{
-		"id": "6ff40f5b-adaf-4da3-babc-809af4b15c6f",
-		"title": "saksn",
-		"description": "jaksl",
-		"price": "23",
-		"code": "1",
-		"stock": "1"
 	}
 ]

@@ -30,5 +30,15 @@
       divProducts.appendChild(productElement);
     });
   });
+  document
+    .getElementById("formProductDelete")
+    .addEventListener("submit", (e) => {
+      e.preventDefault();
+      const idToDelete = document.getElementById("idProductDelete").value;
+      console.log(idToDelete);
+      socket.emit("deleteProductById", idToDelete);
+      document.getElementById("idProductDelete").value = "";
+      document.getElementById("idProductDelete").focus();
+    });
 })();
 console.log("hola desde el real time products");
