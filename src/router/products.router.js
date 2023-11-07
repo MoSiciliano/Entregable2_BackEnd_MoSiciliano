@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductManager from "../clases/ProductManager.js";
+import productsModels from "../models/products.models.js";
 
 const productManager = new ProductManager();
 
@@ -38,7 +39,8 @@ router.post("/", async (req, res) => {
 });
 router.get("/", async (req, res) => {
   const { limit } = req.query;
-  const products = await productManager.getProducts();
+  // const products = await productManager.getProducts();
+  const products = await productsModels.find();
   if (!limit) {
     res.status(200).json(products);
   } else {

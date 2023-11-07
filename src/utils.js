@@ -41,3 +41,9 @@ export const saveJSONToFile = async (path, data) => {
     throw new Error(`The file ${path} couldn't be written.`);
   }
 };
+export class Exception extends Error {
+  constructor(message, status) {
+    super(message);
+    this.statusCode = status;
+  }
+}

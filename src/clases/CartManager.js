@@ -1,5 +1,5 @@
 import { getJSONFromFile, saveJSONToFile } from "../utils.js";
-import fs from "fs";
+
 import { v4 as uuidv4 } from "uuid";
 class CartManager {
   constructor() {

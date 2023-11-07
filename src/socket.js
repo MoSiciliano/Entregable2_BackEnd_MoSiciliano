@@ -1,25 +1,32 @@
 import { Server } from "socket.io";
 import ProductManager from "./clases/ProductManager.js";
+import ChatManager from "./dao/ChatManager.js";
 
 let io;
-
-const productManager = new ProductManager();
-const products = await productManager.getProducts();
+let messages = [];
 
 export const init = (httpServer) => {
   io = new Server(httpServer);
   io.on("connection", async (socketClient) => {
     console.log("Cliente conectado 💪 ", socketClient.id);
 
-    socketClient.emit("listProducts", products);
+    socketClient.emit("notification", { messages });
     socketClient.on("addProduct", async (newProduct) => {
-      await productManager.addProduct(newProduct);
-      // console.log(products);
+      await ProductManager.create(newProduct);
+      let products = await ProductManager.get();
+      socketClient.emit("listProducts", products);
       io.emit("listProducts", products);
     });
-    socketClient.on("deleteProductById", async (idToDelete) => {
-      await productManager.deleteProduct(idToDelete);
-      io.emit("listProducts", products);
+    socketClient.broadcast.emit("new-client");
+    // socketClient.on("deleteProductById", async (idToDelete) => {
+    // await ProductManager.deleteOne(idToDelete);
+    // io.emit("listProducts", products);
+    // });
+    socketClient.on("new-message", async (data) => {
+      const { username, text } = data;
+      messages.push({ username, text });
+      await ChatManager.create(data);
+      io.emit("notification", { messages });
     });
     socketClient.on("disconnect", () => {
       console.log(`Se ha desconectado el cliente : ${socketClient.id} 😔`);
